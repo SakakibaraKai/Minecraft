@@ -6,7 +6,7 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name = "minecraft_vpc"
   cidr = "10.0.0.0/16"
-  azs            = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  azs = ["us-west-2a", "us-west-2b", "us-west-2c"]
   public_subnets = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
@@ -37,11 +37,11 @@ resource "aws_security_group" "minecraft_server" {
 }
 
 resource "aws_ecs_task_definition" "minecraft_server" {
-  cpu                      = "4096"
-  memory                   = "8192"
   family                   = "minecraft-server"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
+  cpu                      = "4096"
+  memory                   = "8192"
   execution_role_arn       = aws_iam_role.ecs_tasks_execution_role.arn
   container_definitions    = jsonencode([
     {
@@ -96,7 +96,6 @@ resource "aws_ecs_service" "minecraft_server" {
 data "aws_iam_policy_document" "ecs_tasks_execution_role" {
   statement {
     actions = ["sts:AssumeRole"]
-
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
@@ -113,4 +112,3 @@ resource "aws_iam_role_policy_attachment" "ecs_tasks_execution_role" {
   role       = aws_iam_role.ecs_tasks_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-
