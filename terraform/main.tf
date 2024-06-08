@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_instance" "minecraft" {
   ami           = "ami-05a6dba9ac2da60cb"
   instance_type = "t4g.small"
+  key_name      = var.key_name
   security_groups = [aws_security_group.minecraft.name]
   associate_public_ip_address = true
 
