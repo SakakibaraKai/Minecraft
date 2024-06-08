@@ -17,8 +17,8 @@ resource "aws_ecs_cluster" "minecraft_server" {
 resource "aws_security_group" "minecraft_server" {
   name        = "minecraft_server"
   description = "minecraft_server"
-  vpc_id      =  module.vpc.vpc_id
- 
+  vpc_id      = module.vpc.vpc_id
+
   ingress {
     description = "minecraft_server"
     from_port   = 25565
@@ -26,7 +26,7 @@ resource "aws_security_group" "minecraft_server" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
- 
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -42,15 +42,14 @@ resource "aws_ecs_task_definition" "minecraft_server" {
   family                   = "minecraft-server"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn = aws_iam_role.ecs_tasks_execution_role.arn
-  container_definitions = jsonencode([
+  execution_role_arn       = aws_iam_role.ecs_tasks_execution_role.arn
+  container_definitions    = jsonencode([
     {
       name          = "minecraft-server"
       image         = "itzg/minecraft-server:java17-alpine"
       essential     = true
       tty           = true
       stdin_open    = true
-      restart       = "unless-stopped"
       portMappings  = [
         {
           containerPort = 25565
@@ -64,8 +63,8 @@ resource "aws_ecs_task_definition" "minecraft_server" {
           value = "TRUE"
         },
         {
-          "name": "VERSION",
-          "value": "1.19.3"
+          name  = "VERSION"
+          value = "1.19.3"
         }
       ]
       mountPoints   = [
@@ -107,10 +106,10 @@ data "aws_iam_policy_document" "ecs_tasks_execution_role" {
 
 resource "aws_iam_role" "ecs_tasks_execution_role" {
   name               = "ecs-task-execution-role"
-  assume_role_policy = "${data.aws_iam_policy_document.ecs_tasks_execution_role.json}"
+  assume_role_policy = data.aws_iam_policy_document.ecs_tasks_execution_role.json
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_tasks_execution_role" {
-  role       = "${aws_iam_role.ecs_tasks_execution_role.name}"
+  role       = aws_iam_role.ecs_tasks_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
