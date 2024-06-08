@@ -36,6 +36,22 @@ resource "aws_security_group" "minecraft_server" {
   }
 }
 
+# Define the IAM policy document
+data "aws_iam_policy_document" "ecs_task_execution_policy" {
+  statement {
+    actions = ["ecs:RunTask"]  # Adjust permissions as needed
+
+    resources = ["*"]  # This should be restricted to the specific ECS resources if possible
+  }
+}
+
+# Attach the policy to the existing ECS execution role
+resource "aws_iam_policy_attachment" "ecs_task_execution_attachment" {
+  name       = "ecs-task-execution-attachment"
+  roles      = ["ecs-task-execution-role"]  # Replace with the name of your existing ECS execution role
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
 resource "aws_ecs_task_definition" "minecraft_server" {
   family                   = "minecraft-server"
   network_mode             = "awsvpc"
