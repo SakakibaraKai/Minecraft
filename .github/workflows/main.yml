@@ -31,8 +31,3 @@ jobs:
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         AWS_REGION: us-west-2  # Specify the desired region here
 
-    - name: Capture and save public IP
-      run: |
-        terraform output -json | jq -r '.minecraft_server_public_ip.value' > ./terraform/minecraft_server_public_ip.txt
-      working-directory: ./terraform
-
