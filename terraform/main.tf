@@ -12,6 +12,30 @@ resource "aws_instance" "minecraft_server" {
   tags = {
     Name = "Minecraft Server"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum install -y dos2unix",
+      "until command -v dos2unix >/dev/null 2>&1; do sleep 1; done",
+      "dos2unix /home/ec2-user/setup-minecraft.sh",
+      "chmod +x /home/ec2-user/setup-minecraft.sh",
+      "sudo /home/ec2-user/setup-minecraft.sh"
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file(var.private_key_path)
+      host        = self.public_ip
+    }
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file(var.private_key_path)
+      host        = self.public_ip
+    }
+  }
 }
 
 resource "aws_security_group" "minecraft" {
