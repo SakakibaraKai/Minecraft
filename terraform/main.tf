@@ -12,7 +12,7 @@ resource "aws_instance" "minecraft_server" {
   tags = {
     Name = "Minecraft Server"
   }
-
+}
 
 resource "aws_security_group" "minecraft" {
   name        = "Minecraft_Security_Group"
