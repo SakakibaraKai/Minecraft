@@ -13,6 +13,17 @@ resource "aws_instance" "minecraft_server" {
     Name = "Minecraft Server"
   }
 
+  provisioner "file" {
+    source      = "../scripts/setup-minecraft.sh"
+    destination = "/home/ec2-user/setup-minecraft.sh"
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file(var.private_key_path)
+      host        = self.public_ip
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y dos2unix",
@@ -64,4 +75,3 @@ resource "aws_security_group" "minecraft" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
