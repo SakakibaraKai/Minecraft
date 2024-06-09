@@ -32,7 +32,6 @@ resource "aws_instance" "minecraft_server" {
       "chmod +x /home/ec2-user/setup-minecraft.sh",
       "sudo /home/ec2-user/setup-minecraft.sh"
     ]
-
     connection {
       type        = "ssh"
       user        = "ec2-user"
