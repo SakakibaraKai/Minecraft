@@ -40,9 +40,7 @@ resource "aws_instance" "minecraft" {
   key_name      = "lab6"
   availability_zone = "us-west-2a"
   subnet_id     = "subnet-0dc899575612c8714"
-  vpc_security_group_ids = length(data.aws_security_group.existing) == 0 ? 
-                            [aws_security_group.minecraft[0].id] : 
-                            [data.aws_security_group.existing.id]
+  vpc_security_group_ids = length(data.aws_security_group.existing) == 0 ? [aws_security_group.minecraft[0].id] : [data.aws_security_group.existing.id]
 
   lifecycle {
     prevent_destroy = true  
