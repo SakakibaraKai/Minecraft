@@ -35,6 +35,13 @@ jobs:
     - name: Run Ansible playbook
       run: ansible-playbook -e "instance_ip=${{ env.INSTANCE_IP }}" ansible/playbook.yml
 
+    - name: Check Minecraft server with nmap
+      run: |
+        sudo apt update && sudo apt install -y nmap
+        INSTANCE_IP=$(cat terraform/instance_public_ip.txt)
+        sleep 15
+        nmap -sV -Pn -p T:25565 $INSTANCE_IP
+
     - name: Destory terrafrom
       run: terraform destroy -auto-approve
       working-directory: ./terraform
