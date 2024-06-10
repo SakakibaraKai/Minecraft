@@ -11,8 +11,8 @@
 
     - name: Copy reboot.sh script to server
       ansible.builtin.copy:
-        src: ../script/reboot.sh
-        dest: /home/ec2-user/reboot.sh
+        src: ../script/create_reboot.sh
+        dest: /home/ec2-user/create_reboot.sh
         mode: '0755'
         
     - name: Run start_minecraft.sh script
@@ -20,7 +20,7 @@
       args:
         executable: /bin/bash
 
-    - name: Run reboot.sh script
-      ansible.builtin.shell: /home/ec2-user/reboot.sh
+    - name: Run create_reboot script
+      ansible.builtin.shell: /home/ec2-user/create_reboot.sh
       args:
         executable: /bin/bash
