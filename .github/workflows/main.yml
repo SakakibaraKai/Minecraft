@@ -41,12 +41,3 @@ jobs:
         INSTANCE_IP=$(cat terraform/instance_public_ip.txt)
         sleep 15
         nmap -sV -Pn -p T:25565 $INSTANCE_IP
-
-    - name: Destory terrafrom
-      run: terraform destroy -auto-approve
-      working-directory: ./terraform
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        AWS_REGION: us-west-2  # Specify the desired region here
