@@ -5,8 +5,8 @@
   tasks:
     - name: Copy start_minecraft.sh script to server
       ansible.builtin.copy:
-        src: ../script/start_minecraft.sh
-        dest: /home/ec2-user/start_minecraft.sh
+        src: ../script/start_mc.sh
+        dest: /home/ec2-user/start_mc.sh
         mode: '0755'
 
     - name: Copy reboot.sh script to server
@@ -16,7 +16,7 @@
         mode: '0755'
         
     - name: Run start_minecraft.sh script
-      ansible.builtin.shell: /home/ec2-user/start_minecraft.sh
+      ansible.builtin.shell: /home/ec2-user/start_mc.sh
       args:
         executable: /bin/bash
 
