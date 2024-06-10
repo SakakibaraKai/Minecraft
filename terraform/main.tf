@@ -32,9 +32,10 @@ resource "aws_instance" "minecraft_server" {
   ami           = "ami-05a6dba9ac2da60cb"
   instance_type = "t4g.small"
   key_name      = "labweek6key"
-  vpc_security_group_ids = [aws_security_group.Minecraft_Security_Group1.id]
 
   tags = {
-    Name = "Minecraft Server West"
+    Name = "minecraft_server"
   }
+  vpc_security_group_ids = [aws_security_group.Minecraft_Security_Group1.id]
+
 }
