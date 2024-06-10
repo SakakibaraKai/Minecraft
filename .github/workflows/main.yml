@@ -28,6 +28,7 @@ jobs:
         terraform apply -auto-approve
         terraform output -json
         INSTANCE_IP=$(terraform output -raw public_ip)
+        echo "::set-env name=INSTANCE_IP::$INSTANCE_IP
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
