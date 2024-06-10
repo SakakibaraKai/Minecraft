@@ -17,20 +17,17 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.0.0 # Use the version you need
-
-    - name: Run update variables script
-        run: bash ./scripts/updateVariables.sh
     
-   # - name: Initialize Terraform
-    #  run: terraform init
-     # working-directory: ./terraform
+    - name: Initialize Terraform
+      run: terraform init
+      working-directory: ./terraform
 
-   # - name: Apply Terraform configuration
-    #  run: terraform apply -auto-approve
-     # working-directory: ./terraform
-     # env:
-       # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-       # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-       # AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-       # AWS_REGION: us-west-2  # Specify the desired region here
+    - name: Apply Terraform configuration
+      run: terraform apply -auto-approve
+      working-directory: ./terraform
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        AWS_REGION: us-west-2  # Specify the desired region here
 
