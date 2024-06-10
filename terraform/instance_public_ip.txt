@@ -1,1 +1,84 @@
+---
+- name: Setup Minecraft Server on AWS EC2
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  tasks:
+    - name: Update all packages
+      yum:
+        name: "*"
+        state: latest
 
+    - name: Install Java
+      yum:
+        name: java-22-amazon-corretto
+        state: present
+
+    - name: Create Minecraft directory
+      file:
+        path: /opt/minecraft
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Download Minecraft Server JAR
+      get_url:
+        url: https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar
+        dest: /opt/minecraft/server.jar
+        mode: '0755'
+
+    - name: Accept EULA
+      copy:
+        content: "eula=true\n"
+        dest: /opt/minecraft/eula.txt
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Create Minecraft system user
+      user:
+        name: minecraft
+        system: yes
+        create_home: no
+        shell: /sbin/nologin
+
+    - name: Set permissions on Minecraft directory
+      file:
+        path: /opt/minecraft
+        state: directory
+        owner: minecraft
+        group: minecraft
+        recurse: yes
+
+    - name: Create systemd service for Minecraft
+      copy:
+        dest: /etc/systemd/system/minecraft.service
+        content: |
+          [Unit]
+          Description=Minecraft Server
+          After=network.target
+
+          [Service]
+          User=minecraft
+          WorkingDirectory=/opt/minecraft
+          ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar /opt/minecraft/server.jar nogui
+          SuccessExitStatus=143
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+
+    - name: Start Minecraft service
+      systemd:
+        name: minecraft
+        state: started
+        enabled: yes
+
+    - name: Check Minecraft service status
+      command: systemctl status minecraft
+      register: minecraft_service_status
+
+    - name: Print Minecraft service status
+      debug:
+        var: minecraft_service_status.stdout
