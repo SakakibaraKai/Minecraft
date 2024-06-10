@@ -1,0 +1,16 @@
+- name: Setup and start Minecraft server
+  hosts: minecraft
+  become: true
+
+  tasks:
+    - name: Copy start_minecraft.sh script to server
+      ansible.builtin.copy:
+        src: ../script/start_minecraft.sh
+        dest: /home/ec2-user/start_minecraft.sh
+        mode: '0755'
+        
+    - name: Run start_minecraft.sh script
+      ansible.builtin.shell: /home/ec2-user/start_minecraft.sh
+      args:
+        executable: /bin/bash
+    
