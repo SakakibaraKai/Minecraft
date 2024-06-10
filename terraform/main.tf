@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 data "aws_security_group" "existing" {
-  name = "MineCraft"
+  name = "Minecraft_Security_Group1"
 }
 
 resource "aws_security_group" "minecraft" {
