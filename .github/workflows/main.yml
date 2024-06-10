@@ -24,6 +24,7 @@ jobs:
 
     - name: Apply Terraform configuration
       run: |
+        cd terraform
         terraform apply -auto-approve
         terraform output -json | jq -r '.instance_ip.value' > ../terraform/instance_public_ip.txt
       env:
