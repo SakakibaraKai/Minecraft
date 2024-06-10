@@ -8,9 +8,19 @@
         src: ../script/start_minecraft.sh
         dest: /home/ec2-user/start_minecraft.sh
         mode: '0755'
+
+    - name: Copy reboot.sh script to server
+      ansible.builtin.copy:
+        src: ../script/reboot.sh
+        dest: /home/ec2-user/reboot.sh
+        mode: '0755'
         
     - name: Run start_minecraft.sh script
       ansible.builtin.shell: /home/ec2-user/start_minecraft.sh
       args:
         executable: /bin/bash
-    
+
+    - name: Run reboot.sh script
+      ansible.builtin.shell: /home/ec2-user/reboot.sh
+      args:
+        executable: /bin/bash
