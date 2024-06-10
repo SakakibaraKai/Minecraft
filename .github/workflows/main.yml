@@ -43,9 +43,12 @@ jobs:
         INSTANCE_IP=$(cat terraform/instance_public_ip.txt)
         echo "[minecraft]" > ansible_hosts
         echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ansible_hosts
-        
+
+    - name: Display Ansible inventory
+      run: cat ansible_hosts
+      
     - name: Run Ansible playbook
-      run: ansible-playbook -e "instance_ip=${{ env.INSTANCE_IP }}" ansible/playbook.yml
+      run: ansible-playbook -i ansible_hosts ansible/playbook.yml
 
     - name: Check Minecraft server with nmap
       run: |
