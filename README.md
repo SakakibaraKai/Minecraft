@@ -1,4 +1,4 @@
-# README: Instructions on How to Start a Minecraft Server
+# README: Instructions on How to Start a Minecraft Server 
 
 ## Requirements
 1. Fork the directory.
