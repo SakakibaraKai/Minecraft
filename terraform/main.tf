@@ -4,6 +4,9 @@ provider "aws" {
 
 data "aws_security_group" "existing" {
   name = "Minecraft_Security_Group1"
+  lifecycle {
+    ignore_changes = [id]
+  }
 }
 
 resource "aws_security_group" "minecraft" {
