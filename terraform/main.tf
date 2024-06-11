@@ -4,9 +4,10 @@ provider "aws" {
 
 data "aws_security_group" "existing" {
   name = "Minecraft_Security_Group1"
-  lifecycle {
-    ignore_changes = [id]
-  }
+}
+
+locals {
+  security_group_exists = try(data.aws_security_group.existing.id, "") != ""
 }
 
 resource "aws_security_group" "minecraft" {
