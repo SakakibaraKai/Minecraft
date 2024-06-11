@@ -61,3 +61,6 @@ jobs:
         INSTANCE_IP=$(cat terraform/instance_public_ip.txt)
         sleep 15
         nmap -sV -Pn -p T:25565 $INSTANCE_IP
+
+    - name: Output Ip
+      run: terraform output -json | jq -r '.instance_ip.value'
