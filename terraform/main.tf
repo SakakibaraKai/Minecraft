@@ -31,7 +31,7 @@ resource "aws_security_group" "minecraft" {
   }
 }
 
-resource "aws_instance" "minecraft_server" {
+resource "aws_instance" "minecraft" {
   ami           = "ami-05a6dba9ac2da60cb"
   instance_type = "t4g.small"
   key_name      = "labweek6key"
