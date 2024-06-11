@@ -4,7 +4,7 @@ provider "aws" {
 
 
 resource "aws_security_group" "minecraft" {
-  count       = length(data.aws_security_group.existing) == 0 ? 1 : 0
+  #count       = length(data.aws_security_group.existing) == 0 ? 1 : 0
   name        = "Minecraft_Security_Group1"
   description = "Security group for minecraft server"
   vpc_id      = "vpc-0d7050b9b79c37ac1"
