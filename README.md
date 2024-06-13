@@ -90,7 +90,8 @@ resource "aws_instance" "minecraft" {
 }```
 
 3. ansible/playbook.yml - This ansible playbook load 2 scripts talked about later one being the instaltion of minecraft and the second is the reboot script that run server start commands upon the ec2 instanct startup/reboot
-```- name: Setup and start Minecraft server
+```
+- name: Setup and start Minecraft server
   hosts: minecraft
   become: true
 
@@ -115,10 +116,12 @@ resource "aws_instance" "minecraft" {
     - name: Run create_reboot script
       ansible.builtin.shell: /home/ec2-user/create_reboot.sh
       args:
-        executable: /bin/bash```
+        executable: /bin/bash
+```
 
 4. script/start_mc.sh - this script was developed and used by the previous developer to install minecraft to ec2 along will installing the nessesary java to aws for minecraft to run. To change the version you may change the ```MINECRAFTSERVERURL``` url to match a version of minecraft you wish to use.
-```#!/bin/bash
+```
+#!/bin/bash
 
 # *** INSERT SERVER DOWNLOAD URL BELOW ***
 # Do not add any spaces between your link and the "=", otherwise it won't work. EG: MINECRAFTSERVERURL=https://urlexample
@@ -160,14 +163,17 @@ sudo systemctl daemon-reload
 sudo systemctl enable minecraft.service
 sudo systemctl start minecraft.service
 
-# End script```
+# End script
+```
 
 5. script/create_reboot.sh - this script installs and creates a crontab on the ec2 instace to trigger auto restart upon ec2 launch or reboot.
-```#!/bin/bash
+```
+#!/bin/bash
 sudo yum install -y cronie
 cat <<EOF > /opt/minecraft/server/startup.sh
 #!/bin/bash
 sudo /opt/minecraft/server/start
 EOF
 chmod +x /opt/minecraft/server/startup.sh
-(crontab -l 2>/dev/null; echo "@reboot /opt/minecraft/server/startup.sh") | crontab -```
+(crontab -l 2>/dev/null; echo "@reboot /opt/minecraft/server/startup.sh") | crontab -
+```
