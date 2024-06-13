@@ -85,9 +85,11 @@ resource "aws_instance" "minecraft" {
 
 2. terraform/output.tf - will be used to output the aws_instance public ipv4
    
-```output "instance_ip" {
+```
+output "instance_ip" {
   value = aws_instance.minecraft.public_ip
-}```
+}
+```
 
 3. ansible/playbook.yml - This ansible playbook load 2 scripts talked about later one being the instaltion of minecraft and the second is the reboot script that run server start commands upon the ec2 instanct startup/reboot
 ```
