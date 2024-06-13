@@ -32,7 +32,9 @@ Do not share your PEM key with anyone.
 
 ## Code explanitions
 1. terraform/Main.tf - contains the main terraform file that is read. It creates a aws_security_group named minecraft with the port at ```25565``` and opens a aws ec2 instance with the name of minecraft with the existing key name in this case ```labweek6key``` please replace.
-```provider "aws" {
+   
+```
+provider "aws" {
   region = "us-west-2"
 }
 
@@ -79,7 +81,8 @@ resource "aws_instance" "minecraft" {
   #vpc_security_group_ids = length(data.aws_security_group.existing) == 0 ? [aws_security_group.minecraft[0].id] : [data.aws_security_group.existing.id]
 
 
-}```
+}
+```
 
 2. terraform/output.tf - will be used to output the aws_instance public ipv4
 ```output "instance_ip" {
