@@ -80,11 +80,11 @@ resource "aws_instance" "minecraft" {
   #vpc_id      = "vpc-0d7050b9b79c37ac1"
   #vpc_security_group_ids = length(data.aws_security_group.existing) == 0 ? [aws_security_group.minecraft[0].id] : [data.aws_security_group.existing.id]
 
-
 }
 ```
 
 2. terraform/output.tf - will be used to output the aws_instance public ipv4
+   
 ```output "instance_ip" {
   value = aws_instance.minecraft.public_ip
 }```
