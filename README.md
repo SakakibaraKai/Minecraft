@@ -1,4 +1,4 @@
-# README: Instructions on How to Start a Minecraft Server  
+# README: Instructions on How to Start a <span style="color: green;">Minecraft Server</span>
 
 ## Table of Contents
 - [Requirements](#requirements)
