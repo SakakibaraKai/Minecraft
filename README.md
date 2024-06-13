@@ -7,11 +7,6 @@
 - [Customization](#customization)
 - [Security Considerations](#security-considerations)
 - [Code Explanations](#code-explanations)
-  - [terraform/main.tf](#1-terraformmain.tf)
-  - [terraform/output.tf](#2-terraformoutput.tf)
-  - [ansible/playbook.yml](#3-ansibleplaybook.yml)
-  - [script/start_mc.sh](#4-scriptstart_mc.sh)
-  - [script/create_reboot.sh](#5-scriptcreate_reboot.sh)
 
 ## Requirements
 1. Fork the directory.
