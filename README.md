@@ -80,10 +80,12 @@ resource "aws_instance" "minecraft" {
 
 
 }```
+
 2. terraform/output.tf - will be used to output the aws_instance public ipv4
 ```output "instance_ip" {
   value = aws_instance.minecraft.public_ip
 }```
+
 3. ansible/playbook.yml - This ansible playbook load 2 scripts talked about later one being the instaltion of minecraft and the second is the reboot script that run server start commands upon the ec2 instanct startup/reboot
 ```- name: Setup and start Minecraft server
   hosts: minecraft
@@ -111,6 +113,7 @@ resource "aws_instance" "minecraft" {
       ansible.builtin.shell: /home/ec2-user/create_reboot.sh
       args:
         executable: /bin/bash```
+
 4. script/start_mc.sh - this script was developed and used by the previous developer to install minecraft to ec2 along will installing the nessesary java to aws for minecraft to run. To change the version you may change the ```MINECRAFTSERVERURL``` url to match a version of minecraft you wish to use.
 ```#!/bin/bash
 
@@ -155,6 +158,7 @@ sudo systemctl enable minecraft.service
 sudo systemctl start minecraft.service
 
 # End script```
+
 5. script/create_reboot.sh - this script installs and creates a crontab on the ec2 instace to trigger auto restart upon ec2 launch or reboot.
 ```#!/bin/bash
 sudo yum install -y cronie
