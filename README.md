@@ -14,15 +14,15 @@
    - [script/create_reboot.sh](#5-scriptcreaterebootsh)
 
 ## Requirements
-1. Fork the directory.
-2. Have an AWS key. If not created, please create and upload your key on AWS.
-3. Add 4 secrets. These details will be held in the GitHub repository's settings under:
+[ ] Fork the directory.
+[ ] Have an AWS key. If not created, please create and upload your key on AWS.
+[ ] Add 4 secrets. These details will be held in the GitHub repository's settings under:
    - Name: **AWS_ACCESS_KEY_ID** - Copy and paste the **AWS_ACCESS_KEY_ID** here.
    - Name: **AWS_SECRET_ACCESS_KEY** - Copy and paste the **AWS_SECRET_ACCESS_KEY** here.
    - Name: **AWS_SESSION_TOKEN** - Copy and paste the **AWS_SESSION_TOKEN** here.
    - Name: **SSH_KEY_PEM** - Paste PEM key contents here.
-4. In the `terraform` directory, edit the `main.tf` file. Update the variable named `key_name` to match your created key name.
-5. In the main.tf File on line 10 there should be a vpc_id locacate and find a existing vpc and copy the vpc_id as the set value.
+[ ] In the `terraform` directory, edit the `main.tf` file. Update the variable named `key_name` to match your created key name.
+[ ] In the main.tf File on line 10 there should be a vpc_id locacate and find a existing vpc and copy the vpc_id as the set value.
 
 ## Steps to Connect and Start EC2 with Minecraft
 1. After every main push, it will create an EC2 instance using GitHub Actions. You can find the IPv4 address to connect to in the Actions tab under the Terraform section.
