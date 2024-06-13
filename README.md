@@ -31,7 +31,7 @@ You can change the version the server is started and created on by changing the 
 Do not share your PEM key with anyone.
 
 ## Code Explanations
-1. [terraform/Main.tf](terraform/Main.tf) - Contains the main Terraform file that is read. It creates an AWS security group named "minecraft" with the port at 25565 and opens an AWS EC2 instance with the name "minecraft" with the existing key name, in this case labweek6key, which you should replace.
+1. [terraform/main.tf](terraform/main.tf) - Contains the main Terraform file that is read. It creates an AWS security group named "minecraft" with the port at 25565 and opens an AWS EC2 instance with the name "minecraft" with the existing key name, in this case labweek6key, which you should replace.
    
 ```
 provider "aws" {
