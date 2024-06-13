@@ -106,7 +106,8 @@ output "instance_ip" {
 }
 ```
 
-### 3. [ansible/playbook.yml](ansible/playbook.yml) - This Ansible playbook loads 2 scripts mentioned later: one for the installation of Minecraft and the second for the reboot script that runs server start commands upon the EC2 instance startup/reboot.
+### 3. [ansible/playbook.yml](ansible/playbook.yml) 
+This Ansible playbook loads 2 scripts mentioned later: one for the installation of Minecraft and the second for the reboot script that runs server start commands upon the EC2 instance startup/reboot.
 ```
 - name: Setup and start Minecraft server
   hosts: minecraft
