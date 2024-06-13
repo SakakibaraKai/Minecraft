@@ -44,7 +44,8 @@ You can change the version the server is started and created on by changing the 
 Do not share your PEM key with anyone.
 
 ## Code Explanations
-###1. [terraform/main.tf](terraform/main.tf) - Contains the main Terraform file that is read. It creates an AWS security group named "minecraft" with the port at 25565 and opens an AWS EC2 instance with the name "minecraft" with the existing key name, in this case labweek6key, which you should replace.
+###1. [terraform/main.tf](terraform/main.tf) 
+Contains the main Terraform file that is read. It creates an AWS security group named "minecraft" with the port at 25565 and opens an AWS EC2 instance with the name "minecraft" with the existing key name, in this case labweek6key, which you should replace.
    
 ```
 provider "aws" {
@@ -96,7 +97,8 @@ resource "aws_instance" "minecraft" {
 }
 ```
 
-###2. [terraform/output.tf](terraform/output.tf)- Will be used to output the AWS instance's public IPv4.
+###2. [terraform/output.tf](terraform/output.tf)
+Will be used to output the AWS instance's public IPv4.
    
 ```
 output "instance_ip" {
@@ -134,7 +136,8 @@ output "instance_ip" {
         executable: /bin/bash
 ```
 
-###4. [script/start_mc.sh](script/start_mc.sh) - This script was developed and used by the previous developer to install Minecraft to EC2 along with installing the necessary Java for Minecraft to run. To change the version, you may change the ```MINECRAFTSERVERURL``` URL to match a version of Minecraft you wish to use.
+###4. [script/start_mc.sh](script/start_mc.sh)
+This script was developed and used by the previous developer to install Minecraft to EC2 along with installing the necessary Java for Minecraft to run. To change the version, you may change the ```MINECRAFTSERVERURL``` URL to match a version of Minecraft you wish to use.
 ```
 #!/bin/bash
 
@@ -181,7 +184,8 @@ sudo systemctl start minecraft.service
 # End script
 ```
 
-###5. [script/create_reboot.sh](script/create_reboot.sh) - This script installs and creates a crontab on the EC2 instance to trigger an auto restart upon EC2 launch or reboot.
+###5. [script/create_reboot.sh](script/create_reboot.sh)
+This script installs and creates a crontab on the EC2 instance to trigger an auto restart upon EC2 launch or reboot.
 ```
 #!/bin/bash
 sudo yum install -y cronie
