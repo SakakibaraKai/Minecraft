@@ -16,7 +16,7 @@
 ## Requirements
 - [ ] Fork the directory.
 - [ ] Have an AWS key. If not created, please create and upload your key on AWS.
-- [ ] Add 4 secrets. These details will be held in the GitHub repository's settings under:
+- [ ] Add 4 secrets. These details will be held in the GitHub repository's settings under. [See more here](Capture.JPG):
    - Name: **AWS_ACCESS_KEY_ID** - Copy and paste the **AWS_ACCESS_KEY_ID** here.
    - Name: **AWS_SECRET_ACCESS_KEY** - Copy and paste the **AWS_SECRET_ACCESS_KEY** here.
    - Name: **AWS_SESSION_TOKEN** - Copy and paste the **AWS_SESSION_TOKEN** here.
